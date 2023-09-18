@@ -1,6 +1,6 @@
 ---
-title: "Multivariate Assignment"
-author: "Sarvesh Naik 22204841"
+title: "Multivariate Analysis"
+author: "Sarvesh Naik"
 date: "`r Sys.Date()`"
 output:
   word_document: default
@@ -34,7 +34,6 @@ options(warn = -1) # to ignore the warnings generated during pairs plot using gg
 
 ```
 
-# 1.
 
 ```{r }
 
@@ -56,7 +55,6 @@ The first 51 columns contain information about the breed, sampling date, protein
 The MIR Spectra readings on 531 different wave-lengths are contained in the last 531 columns of this data. 
 
 
-# 2. 
 
 ```{r}
 
@@ -161,8 +159,6 @@ ggplot(data=data_filtered, aes(x=beta_lactoglobulin_b)) +
 After filtering out observations with β Lactoglobulin B outside of 3 standard deviations, we see little difference in the median and mean of the data but observe notable difference in maximum value obsereved ( earlier- 9.702, now - 7.43)
 
 
-# 3.
-
 Hierarchical Clustering
 
 ```{r}
@@ -235,7 +231,6 @@ table(km_fit$cluster)
 From the above table and Elbow plot, we infer that 3 clusters are optimum for the clustering of MIR Spectra data. 
 In K-means clustering, cluster 1 has 130 observations, cluster 2 has 167 and cluster 3 has 8. 
 
-# 4. 
 
 Before applying PCA, it's important to preprocess the data by centering and scaling the variables to have mean zero and standard deviation one. This is necessary to ensure that all variables are equally important in the analysis.
 
@@ -271,9 +266,6 @@ ggplot(var_df, aes(x = Component, y = Proportion_Variance_Explained)) +
 
 In the above pot, the x-axis represents the principal component number (from 1 to 10) and the y-axis represents the cumulative proportion of variance explained, expressed as a percentage.
 This plot is useful in determining how many principal components should be used to represent the data. In this particular case, we can see that the first principal component explains over 51% of the variance in the data, while the first two principal components combined explain over 82% of the variance and the first three principal components explain over 94.9% of the variance or preserve 94.9% of the information. Therefore, we choose to use the first three principal components as a summary of the data.
-
-
-# 5.
 
 ```{r}
 
@@ -314,19 +306,6 @@ PCA is a technique used to reduce the dimensionality of data by identifying patt
 
 The plot shows that the data has some structure and can be grouped into two clusters based on the values of the principal components. The colors of the points in the plot represent the values of the third principal component, and we can see that there are distinct color clusters in the plot, which indicates that there may be underlying patterns or relationships in the data that can be further explored.
 
-
-# 6. 
-
-Principal Components Regression (PCR) is a popular statistical method for predicting an outcome variable using a set of predictor variables or features.
-The goal of PCR is to find a smaller set of linear combinations of predictor variables (referred to as principal components) that explain the majority of the variability in the data, and then use these components as predictors in a regression model.
-The primary goal of PCR is to combat overfitting in high-dimensional data, where the number of predictor variables (p) is much greater than the number of samples (n) 
-
-The initial step in performing PCR involves reducing the data's dimensionality by utilizing PCA to transform the original variables into a fresh set of orthogonal variables referred to as principal components (PCs). Each PC is a linear combination of the original variables and accounts for a declining percentage of the total variance in the data. Next, the PCs are employed as predictors in a linear regression model with the dependent variable, and the regression coefficients are used to calculate each PC's contribution to the dependent variable. When utilizing PCR, it's essential to determine the number of principal components to include in the regression model, which may be accomplished using various methods such as cross-validation or information criteria. Furthermore, the number of PCs selected may impact the results' accuracy and interpretability.
-
-PCR is beneficial for handling high-dimensional data with a limited number of samples in fields such as biology, chemistry, and finance. It can also reveal the structure of the data and identify important predictor variables. However, several limitations need to be taken into account when utilizing PCR. Firstly, selecting the number of principal components is crucial and may require expertise or trial and error. Secondly, PCR assumes a linear relationship between predictor and outcome variables, which is not always the case. Thirdly, multi-collinearity can lead to unstable estimates of the regression coefficients. In summary, PCR is a powerful approach for predicting outcomes using a smaller set of principal components. However, careful consideration of its limitations and assumptions is essential for reliable results.
-
-
-# 7. 
 
 ```{r }
 
@@ -397,7 +376,6 @@ cumsum(explvar(pcr_model)[1:10])
 ```
 We fit the model again with number of components as 43. The RMSE (root mean squared error) value of 2.350005 indicates that on average, the predicted beta lactoglobulin B levels from the PCR model are off by approximately 2.35 units compared to the actual values in the test data.
 
-# 8. 
 
 ```{r}
 
@@ -431,9 +409,7 @@ We can see after comparing the imputed values with the other values that some of
 It is important to note that imputing missing values using PCA assumes that the missing values are missing at random (MAR) and that the observed values have some correlation with the missing values. If this assumption is not met, then imputing the missing values using PCA may not produce accurate results.
 Therefore, it is advisable to check the imputed values against the original values to evaluate the accuracy of the imputation method.
 
-# 9. 
 
-(a)
 ```{r}
 
 ## Store data with non-zero beta_lactoglobulin_b values
@@ -450,7 +426,6 @@ test_pred1 <- predict(pcr_model1, newdata = test1)
 ```
 
 
-(b)
 ```{r}
 
 # Calculate the mean of non-zero values
@@ -473,7 +448,7 @@ pcr_model2 <- pcr(beta_lactoglobulin_b ~ ., data = train2, scale =TRUE, validati
 test_pred2 <- predict(pcr_model2, newdata = test2)
 ```
 
-(c) all records but where 0 values of beta Lactoglobulin B values are imputed
+All records but where 0 values of beta Lactoglobulin B values are imputed
 using principal components analysis. Comment on what you observe.
 ```{r}
 
