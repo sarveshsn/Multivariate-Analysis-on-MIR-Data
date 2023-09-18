@@ -1,8 +1,5 @@
 # Multivariate Analysis Project
 
-Author: Sarvesh Naik
-Date: [Date]
-
 ## Table of Contents
 
 - [Introduction](#introduction)
