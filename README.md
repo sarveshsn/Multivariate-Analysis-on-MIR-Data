@@ -116,11 +116,10 @@ In conclusion, this project provides a comprehensive analysis of multivariate da
 
 
 ## License
+This project is open-source and available under the [MIT License](LICENSE).
 
-This project is licensed under the [MIT License](LICENSE).
+---
 
-
-## Author 
-
-- **Sarvesh Sairam Naik**
+**Author:** Sarvesh Sairam Naik  
+**GitHub Repository:** [GitHub Link](https://github.com/sarveshsn)
 
